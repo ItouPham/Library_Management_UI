@@ -3,6 +3,7 @@ import styles from './Book.module.scss';
 import { Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import flower from '../../assets/images/flower.jpg';
 
 const cx = classNames.bind(styles);
 const Book = () => {
@@ -16,12 +17,14 @@ const Book = () => {
         <>
             <Container>
                 <h1>Book page</h1>
-                {books.map((book) => (
+                {/* {books.map((book) => (
                     <div key={book.id} className="d-flex align-items-center">
                         <h3>Name:</h3>
                         <p className="m-0">{book.name}</p>
+                        <img src="" alt="" />
                     </div>
-                ))}
+                ))} */}
+                <img src={flower} alt="" />
             </Container>
         </>
     );
