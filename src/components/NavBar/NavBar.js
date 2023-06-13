@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 const NavBar = () => {
     return (
         <>
-            <Navbar bg="primary" variant="dark">
+            <Navbar bg="primary" variant="dark" className='p-3'>
                 <Container>
                     <Link to="/" className={cx('text-white me-4', 'navItem')}>
                         LOGO

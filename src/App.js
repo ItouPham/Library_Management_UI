@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { publicRoutes } from './routes';
 import NavBar from './components/NavBar/NavBar';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                             <Route key={`public ${index}`} path={route.path} element={<Page />} />
                         );
                     })}
+                    <Route path="*" element={<NotFound />}></Route>
                 </Routes>
             </div>
         </Router>

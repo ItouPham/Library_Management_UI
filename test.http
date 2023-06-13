@@ -1,1 +1,7 @@
-GET http://localhost:8080/book
+# GET http://localhost:8080/book?size=30
+
+
+
+
+
+GET http://localhost:8080/book/getById/64869b2a13da9d0cdd728981
