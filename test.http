@@ -1,7 +1,9 @@
-# GET http://localhost:8080/book?size=30
+GET http://localhost:8080/book?page=1&size=12
 
+###
 
+GET http://localhost:8080/book/category/643fa18831fa812c081ce3d2
 
+#####
 
-
-GET http://localhost:8080/book/getById/64869b2a13da9d0cdd728981
+GET http://localhost:8080/book/category/643fa18831fa812c081ce3d2

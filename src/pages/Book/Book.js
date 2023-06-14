@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Book.module.scss';
 import { Button, Card, Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 const Book = () => {
@@ -20,11 +20,20 @@ const Book = () => {
         });
         return output;
     };
+
+    const navigateByCategory = (category) => {
+        return <Navigate to={`book/category/${category}`} />;
+    };
     return (
         <>
             <Container>
                 <div>
-                    <h2 className="text-center mb-4 mt-5">New Books</h2>
+                    <Link
+                        to="/book/category/new-book/1"
+                        className="d-block h2 text-dark text-center my-5"
+                    >
+                        New Books
+                    </Link>
                     <div
                         className="d-grid justify-content-between"
                         style={{
@@ -61,7 +70,12 @@ const Book = () => {
                 </div>
 
                 <div>
-                    <h2 className="text-center mb-4">Horror Books</h2>
+                    <Link
+                        to="/book/category/643fa18831fa812c081ce3d2/1"
+                        className="d-block h2 text-dark text-center my-5"
+                    >
+                        Horror Books
+                    </Link>
                     <div
                         className="d-grid justify-content-between"
                         style={{

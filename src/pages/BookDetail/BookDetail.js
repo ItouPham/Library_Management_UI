@@ -31,6 +31,7 @@ const BookDetail = (props) => {
 
     return (
         <Container>
+            {/* {console.log(state)} */}
             {console.log(book)}
             <h1>Book Detail</h1>
             <h3>Name</h3>
