@@ -7,10 +7,14 @@ import { Link, Navigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
 const Book = () => {
     const [books, setBook] = useState([]);
+    // const [categories, setCategories] = useState([]);
     useEffect(() => {
         fetch('book?size=30', { headers: { 'Content-Type': 'application/json' }, method: 'GET' })
             .then((response) => response.json())
-            .then((data) => setBook(data.books));
+            .then((data) => {
+                setBook(data.books);
+                // setCategories(data.categories);
+            });
     }, []);
 
     const filterByCategory = (category) => {
@@ -21,9 +25,6 @@ const Book = () => {
         return output;
     };
 
-    const navigateByCategory = (category) => {
-        return <Navigate to={`book/category/${category}`} />;
-    };
     return (
         <>
             <Container>
@@ -54,14 +55,7 @@ const Book = () => {
                                         style={{ height: 230 }}
                                     />
                                     <Card.Body className="p-0">
-                                        <h6>{book.name}</h6>
-
-                                        {/* <Card.Title>{book.name}</Card.Title> */}
-                                        {/* <Card.Text>
-                                                Some quick example text to build on the card title and make up
-                                                the bulk of the card's content.
-                                            </Card.Text>
-                                            <Button variant="primary">Go somewhere</Button> */}
+                                        <h6 className="text-center">{book.name}</h6>
                                     </Card.Body>
                                 </Card>
                             </Link>
@@ -85,131 +79,59 @@ const Book = () => {
                         {filterByCategory('Horror')
                             .slice(0, 6)
                             .map((book) => (
-                                <Card
+                                <Link
+                                    to={`/book/${book.id}`}
                                     key={book.id}
-                                    style={{ width: '10rem' }}
-                                    className="mb-5 border-0"
+                                    state={{ book: book }}
+                                    className="text-dark"
                                 >
-                                    <Card.Img
-                                        variant="top"
-                                        src={book.image.link}
-                                        style={{ height: 230 }}
-                                    />
-                                    <Card.Body className="p-0">
-                                        <h6>{book.name}</h6>
-                                        {/* <Card.Title>{book.name}</Card.Title> */}
-                                        {/* <Card.Text>
-                                            Some quick example text to build on the card title and make up
-                                            the bulk of the card's content.
-                                        </Card.Text>
-                                        <Button variant="primary">Go somewhere</Button> */}
-                                    </Card.Body>
-                                </Card>
+                                    <Card style={{ width: '10rem' }} className="mb-5 border-0">
+                                        <Card.Img
+                                            variant="top"
+                                            src={book.image.link}
+                                            style={{ height: 230 }}
+                                        />
+                                        <Card.Body className="p-0">
+                                            <h6 className="text-center">{book.name}</h6>
+                                        </Card.Body>
+                                    </Card>
+                                </Link>
                             ))}
                     </div>
                 </div>
-
                 <div>
-                    <h2 className="text-center mb-4">Classics Books</h2>
+                    <Link
+                        to="/book/category/643fa19831fa812c081ce3d4/1"
+                        className="d-block h2 text-dark text-center my-5"
+                    >
+                        Romance Books
+                    </Link>
                     <div
                         className="d-grid justify-content-between"
                         style={{
                             gridTemplateColumns: 'repeat(auto-fill, 13rem)',
                         }}
                     >
-                        {filterByCategory('Classics')
+                        {filterByCategory('Romance')
                             .slice(0, 6)
                             .map((book) => (
-                                <Card
+                                <Link
+                                    to={`/book/${book.id}`}
                                     key={book.id}
-                                    style={{ width: '10rem' }}
-                                    className="mb-5 border-0"
+                                    state={{ book: book }}
+                                    className="text-dark"
                                 >
-                                    <Card.Img
-                                        variant="top"
-                                        src={book.image.link}
-                                        style={{ height: 230 }}
-                                    />
-                                    <Card.Body className="p-0">
-                                        <h6>{book.name}</h6>
-                                        {/* <Card.Title>{book.name}</Card.Title> */}
-                                        {/* <Card.Text>
-                                            Some quick example text to build on the card title and make up
-                                            the bulk of the card's content.
-                                        </Card.Text>
-                                        <Button variant="primary">Go somewhere</Button> */}
-                                    </Card.Body>
-                                </Card>
-                            ))}
-                    </div>
-                </div>
-
-                <div>
-                    <h2 className="text-center mb-4">Action and Adventure Books</h2>
-                    <div
-                        className="d-grid justify-content-between"
-                        style={{
-                            gridTemplateColumns: 'repeat(auto-fill, 13rem)',
-                        }}
-                    >
-                        {filterByCategory('Action and Adventure')
-                            .slice(0, 6)
-                            .map((book) => (
-                                <Card
-                                    key={book.id}
-                                    style={{ width: '10rem' }}
-                                    className="mb-5 border-0"
-                                >
-                                    <Card.Img
-                                        variant="top"
-                                        src={book.image.link}
-                                        style={{ height: 230 }}
-                                    />
-                                    <Card.Body className="p-0">
-                                        <h6>{book.name}</h6>
-                                        {/* <Card.Title>{book.name}</Card.Title> */}
-                                        {/* <Card.Text>
-                                            Some quick example text to build on the card title and make up
-                                            the bulk of the card's content.
-                                        </Card.Text>
-                                        <Button variant="primary">Go somewhere</Button> */}
-                                    </Card.Body>
-                                </Card>
-                            ))}
-                    </div>
-                </div>
-
-                <div>
-                    <h2 className="text-center mb-4">Fantasy Books</h2>
-                    <div
-                        className="d-grid justify-content-between"
-                        style={{
-                            gridTemplateColumns: 'repeat(auto-fill, 13rem)',
-                        }}
-                    >
-                        {filterByCategory('Fantasy')
-                            .slice(0, 6)
-                            .map((book) => (
-                                <Card
-                                    key={book.id}
-                                    style={{ width: '10rem' }}
-                                    className="mb-5 border-0"
-                                >
-                                    <Card.Img
-                                        variant="top"
-                                        src={book.image.link}
-                                        style={{ height: 230 }}
-                                    />
-                                    <Card.Body className="p-0">
-                                        <h6>{book.name}</h6>
-                                        {/* <Card.Title>{book.name}</Card.Title> */}
-                                        {/* <Card.Text>
-                                            Some quick example text to build on the card title and make up
-                                            the bulk of the card's content.
-                                        </Card.Text>
-                                        <Button variant="primary">Go somewhere</Button> */}
-                                    </Card.Body>
-                                </Card>
+                                    <Card style={{ width: '10rem' }} className="mb-5 border-0">
+                                        <Card.Img
+                                            variant="top"
+                                            src={book.image.link}
+                                            style={{ height: 230 }}
+                                        />
+                                        <Card.Body className="p-0">
+                                            <h6 className="text-center">{book.name}</h6>
+                                        </Card.Body>
+                                    </Card>
+                                </Link>
                             ))}
                     </div>
                 </div>

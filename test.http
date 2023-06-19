@@ -1,4 +1,4 @@
-GET http://localhost:8080/book?page=1&size=12
+GET http://localhost:8080/book?size=30
 
 ###
 

@@ -77,7 +77,7 @@ const ListBookByCategory = () => {
                 {categoryId === 'new-book' ? 'New ' : category.name + ' '}Books
             </h2>
             <Row>
-                <Col md={3}>
+                <Col md={3} className='mb-4'>
                     <Col className="w-100 border border-2">
                         <SideBar categories={categories} />
                     </Col>
@@ -103,7 +103,7 @@ const ListBookByCategory = () => {
                                         style={{ height: 240 }}
                                     />
                                     <Card.Body className="p-0">
-                                        <h5>{book.name}</h5>
+                                        <h6 className='text-center'>{book.name}</h6>
 
                                         {/* <Card.Title>{book.name}</Card.Title> */}
                                         {/* <Card.Text>
