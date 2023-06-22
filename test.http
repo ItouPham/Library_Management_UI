@@ -6,4 +6,4 @@ GET http://localhost:8080/book/category/643fa18831fa812c081ce3d2
 
 #####
 
-GET http://localhost:8080/book/category/643fa18831fa812c081ce3d2
+GET http://localhost:8080/book/getById/6487e9714f6041119df3896c
