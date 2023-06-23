@@ -27,7 +27,7 @@ const ListBookByCategory = () => {
                 setCategory(data.categories.find((value) => value.id === categoryId));
             });
         }
-    }, [page]);
+    }, [page, categoryId]);
 
     const getBooksByCategoryId = (id, page) => {
         return fetch(`/book/category/${id}?page=${page}&size=15`, {
@@ -77,71 +77,81 @@ const ListBookByCategory = () => {
                 {categoryId === 'new-book' ? 'New ' : category.name + ' '}Books
             </h2>
             <Row>
-                <Col md={3} className='mb-4'>
+                <Col md={3} className="mb-4">
                     <Col className="w-100 border border-2">
                         <SideBar categories={categories} />
                     </Col>
                 </Col>
-                <Col md={9}>
-                    <div
-                        className="d-grid justify-content-between"
-                        style={{
-                            gridTemplateColumns: 'repeat(auto-fill, 12rem)',
-                        }}
-                    >
-                        {books.map((book) => (
-                            <Link
-                                to={`/book/${book.id}`}
-                                key={book.id}
-                                state={{ book: book }}
-                                className="text-dark"
-                            >
-                                <Card style={{ width: '10rem' }} className="mb-5 border-0">
-                                    <Card.Img
-                                        variant="top"
-                                        src={book.image.link}
-                                        style={{ height: 240 }}
-                                    />
-                                    <Card.Body className="p-0">
-                                        <h6 className='text-center'>{book.name}</h6>
+                {books.length !== 0 ? (
+                    <Col md={9}>
+                        <div
+                            className="d-grid justify-content-between"
+                            style={{
+                                gridTemplateColumns: 'repeat(auto-fill, 12rem)',
+                            }}
+                        >
+                            {books.map((book) => (
+                                <Link
+                                    to={`/book/${book.id}`}
+                                    key={book.id}
+                                    state={{ book: book }}
+                                    className="text-dark"
+                                >
+                                    <Card style={{ width: '10rem' }} className="mb-5 border-0">
+                                        <Card.Img
+                                            variant="top"
+                                            src={book.image.link}
+                                            style={{ height: 240 }}
+                                        />
+                                        <Card.Body className="p-0">
+                                            <h6 className="text-center">{book.name}</h6>
 
-                                        {/* <Card.Title>{book.name}</Card.Title> */}
-                                        {/* <Card.Text>
+                                            {/* <Card.Title>{book.name}</Card.Title> */}
+                                            {/* <Card.Text>
                                                         Some quick example text to build on the card title and make up
                                                         the bulk of the card's content.
                                                     </Card.Text>
                                                     <Button variant="primary">Go somewhere</Button> */}
-                                    </Card.Body>
-                                </Card>
-                            </Link>
-                        ))}
-                    </div>
-                    <Pagination className="justify-content-center my-5">
-                        <Pagination.First
-                            onClick={() => navigate(`/book/category/${categoryId}/1`)}
-                            disabled={Number(page) === 1}
-                        />
-                        <Pagination.Prev
-                            onClick={() =>
-                                navigate(`/book/category/${categoryId}/${Number(page) - 1}`)
-                            }
-                            disabled={Number(page) === 1}
-                        />
-                        {/* <Pagination.Ellipsis /> */}
-                        {getPaginationBtn()}
-                        {/* <Pagination.Ellipsis /> */}
-                        <Pagination.Next
-                            onClick={() =>
-                                navigate(`/book/category/${categoryId}/${Number(page) + 1}`)
-                            }
-                            disabled={Number(page) === totalPages}
-                        />
-                        <Pagination.Last
-                            onClick={() => navigate(`/book/category/${categoryId}/${totalPages}`)}
-                            disabled={Number(page) === totalPages}
-                        />
-                    </Pagination>
-                </Col>
+                                        </Card.Body>
+                                    </Card>
+                                </Link>
+                            ))}
+                        </div>
+                        {totalPages > 1 ? (
+                            <Pagination className="justify-content-center my-5">
+                                <Pagination.First
+                                    onClick={() => navigate(`/book/category/${categoryId}/1`)}
+                                    disabled={Number(page) === 1}
+                                />
+                                <Pagination.Prev
+                                    onClick={() =>
+                                        navigate(`/book/category/${categoryId}/${Number(page) - 1}`)
+                                    }
+                                    disabled={Number(page) === 1}
+                                />
+                                {/* <Pagination.Ellipsis /> */}
+                                {getPaginationBtn()}
+                                {/* <Pagination.Ellipsis /> */}
+                                <Pagination.Next
+                                    onClick={() =>
+                                        navigate(`/book/category/${categoryId}/${Number(page) + 1}`)
+                                    }
+                                    disabled={Number(page) === totalPages}
+                                />
+                                <Pagination.Last
+                                    onClick={() =>
+                                        navigate(`/book/category/${categoryId}/${totalPages}`)
+                                    }
+                                    disabled={Number(page) === totalPages}
+                                />
+                            </Pagination>
+                        ) : (
+                            <></>
+                        )}
+                    </Col>
+                ) : (
+                    <>No data available for this type of book</>
+                )}
             </Row>
         </Container>
     );

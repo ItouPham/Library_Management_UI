@@ -11,7 +11,7 @@ const SideBar = (props) => {
             <h2 className="text-center my-3">CATEGORIES</h2>
             {props.categories.map((category) => (
                 <Link
-                    to="/"
+                    to={`/book/category/${category.id}/1`}
                     key={category.id}
                     className={cx('text-dark mt-3 mb-2 ms-4', 'navItem')}
                 >
