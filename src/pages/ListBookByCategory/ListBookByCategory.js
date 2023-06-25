@@ -104,7 +104,7 @@ const ListBookByCategory = () => {
                                             style={{ height: 240 }}
                                         />
                                         <Card.Body className="p-0">
-                                            <h6 className="text-center">{book.name}</h6>
+                                            <h6 className="text-center mt-2">{book.name}</h6>
 
                                             {/* <Card.Title>{book.name}</Card.Title> */}
                                             {/* <Card.Text>

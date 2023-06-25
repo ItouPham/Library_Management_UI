@@ -1,0 +1,9 @@
+.navItem {
+    &:hover {
+        color: blue !important;
+    }
+}
+
+.active {
+    color: green !important;
+}

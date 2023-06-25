@@ -4,7 +4,12 @@ import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-route
 
 const BookDetail = (props) => {
     const navigate = useNavigate();
-    const [book, setBook] = useState({ image: { link: '' }, author: { id: '', name: '' } });
+
+    const [book, setBook] = useState({
+        image: { link: '' },
+        author: { id: '', name: '' },
+        shortDescription: '',
+    });
     const [books, setBooks] = useState([]);
     const { state } = useLocation();
     const { bookId } = useParams();
@@ -53,7 +58,6 @@ const BookDetail = (props) => {
 
     return (
         <Container>
-            {console.log(books)}
             <h1 className="text-center my-5">Book Detail</h1>
             <Row>
                 <Col md={3}>
@@ -68,7 +72,10 @@ const BookDetail = (props) => {
                     </div>
                     <div>
                         <div className="mb-4">
-                            by <Link>{book.author.name}</Link>
+                            by{' '}
+                            <Link to={`/author/${book.author.id}`} state={{ author: book.author }}>
+                                {book.author.name}
+                            </Link>
                         </div>
                         <p>
                             <b>Publisher:</b> {book.publishedBy}
@@ -79,10 +86,20 @@ const BookDetail = (props) => {
                         <p>
                             <b>Total pages:</b> {book.pageNumbers}
                         </p>
-                        <p>
+
+                        <div>
                             <b>Short description:</b>
-                            <span className="mt-3">{book.shortDescription}</span>
-                        </p>
+                            {/* <p>{book.shortDescription}</p> */}
+                            {book.shortDescription ? (
+                                book.shortDescription
+                                    .split('<br/>')
+                                    .map((str, index) => <p key={index}>{str}</p>)
+                            ) : (
+                                <></>
+                            )}
+                            {/* {book.shortDescription} */}
+                            {/* <p className="mt-3">{book.shortDescription}</p> */}
+                        </div>
                     </div>
                 </Col>
             </Row>
@@ -90,7 +107,7 @@ const BookDetail = (props) => {
                 <hr />
             </div>
             <div>
-                <h3 className='mb-4'>Same author</h3>
+                <h3 className="mb-4">Same author</h3>
                 <div className="d-flex">
                     {books
                         .filter((eachBook) => eachBook.id !== book.id)

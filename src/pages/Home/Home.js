@@ -1,6 +1,7 @@
 // import styte from './Home.module.scss';
-import React from 'react';
+import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
+import FormatText from '../../components/FormatText/FormatText';
 
 const Home = () => {
     return (
